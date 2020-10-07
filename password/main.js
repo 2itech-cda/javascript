@@ -1,8 +1,19 @@
 // main.js
 
 const p = new Password();
+// p.exclude(Password.symbols|Password.lowers);
+// p.include(Password.lowers);
+// console.log(p.generate(20));
 
-p.exclude(Password.symbols|Password.lowers);
-//p.include(Password.lowers);
+let options = document.querySelector('#options');
 
-console.log(p.generate(20));
+p.data.forEach(obj => {
+    // options.innerHTML = '';
+
+    options.innerHTML += `
+        <li class="list-group-item">
+            ${obj.name}
+            (${obj.chars})
+        </li>
+    `;
+});
