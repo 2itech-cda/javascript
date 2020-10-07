@@ -36,7 +36,18 @@ class Password {
     }
 
     generate(size = 16) {
-        
+        if (this.range === 0) {
+            this.setRange(Password.all);
+        }
+
+        let str = '';
+        const chars = this.getChars();
+
+        for (let i = 0; i < size; i++) {
+            str += chars[Math.floor(Math.random() * chars.length)];
+        }
+
+        return str;
     }
 
     setRange(value) {
