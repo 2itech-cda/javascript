@@ -7,14 +7,9 @@
 
 const p = new Password();
 
-p.set(Password.all);
+// p.exclude(Password.symbols|Password.lowers);
+//p.include(Password.lowers);
 
-p.exlude(Password.brackets|Password.symbols);
-p.include(Password.symbols|Password.num|Password.upper|Password.lower);
+console.log(p.getChars());
 
-console.log(p.generate(20)); // sortie : Wd2xXr0.eve0!Xt.MLuL
-
-Password.all = Password.symbols|Password.num|Password.upper|Password.lower
-
-
-var chars = 'abcdefg';
+// console.log(p.range, p.range.toString(2));

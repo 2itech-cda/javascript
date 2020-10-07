@@ -1,10 +1,14 @@
 class Password {
-    static lowers = 1;                                                                                // 00001
-    static uppers = 2;                                                                                // 00010
-    static numbers = 4;                                                                               // 00100
-    static symbols = 8;                                                                               // 01000
-    static brackets = 16;                                                                             // 10000
-    static all = Password.lowers|Password.uppers|Password.numbers|Password.symbols|Password.brackets; // 11111
+    static lowers = 1;             // 00001
+    static uppers = 2;             // 00010
+    static numbers = 4;            // 00100
+    static symbols = 8;            // 01000
+    static brackets = 16;          // 10000
+    static all = Password.lowers|
+                 Password.uppers|
+                 Password.numbers|
+                 Password.symbols|
+                 Password.brackets; // 11111 - 11110 Password.all & ~Password.lowers
 
     constructor() {
         this.data = [
@@ -15,11 +19,24 @@ class Password {
             { name: 'Crochets', range: Password.brackets, chars: '[]{}()<>' },
         ];
 
+        // Le choix de la rangée de caractèrew choisie par l'utilisateur.
         this.setRange(Password.all);
     }
 
-    generate() {
+    getChars() {
+        let chars = '';
 
+        this.data.forEach(obj => {
+            if (obj.range & this.range) {
+                chars += obj.chars;
+            }
+        });
+
+        return chars;
+    }
+
+    generate(size = 16) {
+        
     }
 
     setRange(value) {
