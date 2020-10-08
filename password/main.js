@@ -6,6 +6,8 @@ const size = document.querySelector('#size');
 const slider = document.querySelector('#slider');
 const displayer = document.querySelector('#displayer');
 
+displayer.style.cursor = 'pointer';
+
 refresh();
 
 size.addEventListener('input', () => {
@@ -18,6 +20,10 @@ slider.addEventListener('input', () => {
     refresh();
 });
 
+displayer.addEventListener('click', evt => {
+    copyToClipboard(evt.target.textContent);
+});
+ù
 options.addEventListener('click', evt => {
     const elem = evt.target;
 
@@ -50,4 +56,13 @@ function rangeFormList() {
             </li>
         `;
     });
+}
+
+function copyToClipboard(text) {
+    const dummy = document.createElement('textarea');
+    document.body.appendChild(dummy);
+    dummy.value = text;
+    dummy.select();
+    document.execCommand('copy');
+    document.body.removeChild(dummy);
 }
