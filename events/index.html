@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+</head>
+<body>
+
+    <a href="http://google.com" id="link">Go to Google</a>
+
+    <div onclick="alert('onclick')">Click here</div>
+
+    <div id="root">
+        root
+        <div id="parent">
+            parent
+            <div id="enfant">
+                enfant
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const a = document.querySelector('#link');
+        const root = document.querySelector('#root');
+        const parent = document.querySelector('#parent');
+        const enfant = document.querySelector('#enfant');
+
+        a.addEventListener('click', evt => {
+            evt.preventDefault();
+            alert('Link click');
+            window.location = 'https://bing.com';
+        });
+
+        // capture === true
+        // bubble === false
+        const direction = false;
+
+        root.addEventListener('click', evt => {
+            alert(root.id);
+        }, direction);
+
+        parent.addEventListener('click', evt => {
+            alert(parent.id);
+            evt.stopPropagation();
+        }, direction);
+
+        enfant.addEventListener('click', evt => {
+            alert(enfant.id);
+        }, direction);
+    </script>
+</body>
+
+<style>
+    div { border: 1px solid red; padding: 10px; }
+</style>
+</html>
