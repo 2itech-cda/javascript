@@ -1,19 +1,33 @@
-// main.js
-
 const p = new Password();
-// p.exclude(Password.symbols|Password.lowers);
-// p.include(Password.lowers);
-// console.log(p.generate(20));
+p.exclude(Password.symbols);
 
-let options = document.querySelector('#options');
+const options = document.querySelector('#options');
+const size = document.querySelector('#size');  // <input id="size">
+const slider = document.querySelector('#slider');
 
-p.data.forEach(obj => {
-    // options.innerHTML = '';
+// addEventListener('type', callback, boolean: direction de l'événement);
+// size.addEventListener('input', () => slider.value = size.value );
 
-    options.innerHTML += `
-        <li class="list-group-item">
-            ${obj.name}
-            (${obj.chars})
-        </li>
-    `;
+size.addEventListener('input', event => {
+    // console.log(event.target === size);
+    // console.log(event.target.value);
+    // console.log(size.value);
+    slider.value = size.value;
 });
+
+rangeFormList();
+
+function rangeFormList() {
+    options.innerHTML = '';
+
+    p.data.forEach(obj => {
+        options.innerHTML += `
+            <li class="list-group-item">
+                ${obj.name}
+                (${obj.chars})
+
+                <input type="checkbox" value="${obj.range}" ${ obj.range & p.range ? 'checked' : '' }>
+            </li>
+        `;
+    });
+}
