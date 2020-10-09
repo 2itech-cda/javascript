@@ -1,26 +1,12 @@
+(function () {
 
-let $ = function (selector) {
-    return {
-        text: function (str) {
-            document.querySelector(selector).textContent = str;
-        },
+    window.$ = selector => {
+        return new Api(selector);
+    };
 
-        on: function (evt, f) {
-            document.querySelector(selector).addEventListener(evt, f, false);
-        }
-    }
-};
+}());
 
-
-const title = document.querySelector('h1');
-title.text();
-
-$(title).text('Hello World');
-
-$('h1').text('Hello World');
-
-$('h1').on('click', evt => {
-    alert('My Super lib');
-});
-
-
+$('li').even().css('background-color', 'yellow');
+$('li').odd().css('background-color', 'pink');
+$('li').css('color', 'white');
+$('li').text('Hello, World');
