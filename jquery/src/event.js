@@ -1,4 +1,5 @@
 class MyEvent {
+
     constructor() {
         this.events = [];
     }
@@ -13,7 +14,7 @@ class MyEvent {
     bind(evt, fn, target) {
         // Ici, si l'événement existe on le supprime.
         this.unbind(evt, target);
-ù
+
         // Ajout de l'événement sur l'objet (target).
         target.addEventListener(evt, fn, false);
 

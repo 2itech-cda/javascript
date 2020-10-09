@@ -9,9 +9,17 @@ class Api {
         // Les éléments séléctionnés par le querySelectorAll.
         this.elems = [];
 
+        // Instanciation de la classe MyEvent
+        this.event = new MyEvent();
+
         // $('h1') Si le selector est une chaîne de caractères alors querySelectorAll.
         // $(elem) Si selector est un element HTML alors on le place dans le tableau.
         this.wrap(selector);
+    }
+
+    on(evt, callback) {
+        this.elems.forEach(elem => this.event.bind(evt, callback, elem));
+        return this;
     }
 
     /**

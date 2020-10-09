@@ -10,3 +10,6 @@ $('li').even().css('background-color', 'yellow');
 $('li').odd().css('background-color', 'pink');
 $('li').css('color', 'white');
 $('li').text('Hello, World');
+
+$('li').on('click', evt => alert('Event fired'));
+
