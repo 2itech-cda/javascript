@@ -7,6 +7,6 @@ Réalisation d'une liste de tâches :
 - supprimer une tâche de la liste
 
 Faire attention de ne pas pouvoir ajouter une tâche avec une chaîne
-de caractère vide.
+de caractères vide.
 
 ![Exemple](todo-list.gif)
