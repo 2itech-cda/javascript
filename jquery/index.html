@@ -1,22 +1,46 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jquery</title>
+    <title>Make your own jQuery</title>
 </head>
+
 <body>
-    <h1>Jquery</h1>
 
-    <ul>
-        <li>Item 1</li>
-        <li>Item 2</li>
-        <li>Item 3</li>
-        <li>Item 4</li>
-    </ul>
+    <div id="main">
+        <h1 id="title">jQuery</h1>
 
+        <ul id="list">
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+            <li>Item 4</li>
+            <li>Item 5</li>
+        </ul>
+
+        <input type="text" name="firstName" value="john">
+    </div>
+
+    <script src="src/utils.js"></script>
     <script src="src/event.js"></script>
+    <script src="src/fx.js"></script>
     <script src="src/api.js"></script>
     <script src="main.js"></script>
+
+    <script>
+        $(document).ready(() => {
+            $('li').even().addClass('yourClass').text('Hello World');
+
+            $('h1').on('click', function () {
+                $(this).css('color', 'red');
+                $('li').last().fadeOut(3000);
+            });
+
+            $('li').text('yourClass');
+        });
+    </script>
 </body>
+
 </html>

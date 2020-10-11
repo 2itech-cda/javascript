@@ -1,89 +1,141 @@
+'use strict';
+
 class Api {
 
-    constructor(selector) {
-        // Si il n'y pas de selector alors on arrête.
-        if (!selector) {
-            return;
+    constructor() {
+        this.elems = [];
+        this.event = new Event();
+    }
+
+    addClass(...className) {
+        return this.forEach(elem => elem.classList.add(...className));
+    }
+
+    append(html) {
+        return this.forEach(elem => elem.innerHTML = elem.innerHTML + html);
+    }
+
+    check() {
+        return this.forEach(elem => {
+            if (elem.type && (elem.type === 'checkbox' || elem.type === 'radio')) {
+                elem.setAttribute('checked', '');
+            }
+        });
+    }
+
+    css(property, value = '') {
+        if (Utils.isString(property)) {
+            return this.forEach(elem => elem.style[property] = value);
         }
 
-        // Les éléments séléctionnés par le querySelectorAll.
-        this.elems = [];
+        if (Utils.isObject(property)) {
+            return this.forEach(elem => {
+                for (let p in property) {
+                    elem.style[p] = property[p];
+                }
+            });
+        }
 
-        // Instanciation de la classe MyEvent
-        this.event = new MyEvent();
-
-        // $('h1') Si le selector est une chaîne de caractères alors querySelectorAll.
-        // $(elem) Si selector est un element HTML alors on le place dans le tableau.
-        this.wrap(selector);
-    }
-
-    on(evt, callback) {
-        this.elems.forEach(elem => this.event.bind(evt, callback, elem));
         return this;
     }
 
-    /**
-     * text permet de modifier le texte d'un élément.
-     */
-    text(value) {
-        this.elems.forEach(elem => elem.textContent = value);
+    debug() {
+        console.log(this.elems);
         return this;
     }
 
-    // $('li').addClass('myStyle');
-    // <li class="myStyle"></li>
-    // ...variadic
-    addClass(...className) {
-        this.elems.forEach(elem => elem.classList.add(...className));
+    even() {
+        return this.filter((_elem, index) => index % 2 === 0);
+    }
+
+    fadeIn(duration) {
+        return this.forEach(elem => Fx.fadeIn(elem, duration));
+    }
+
+    fadeOut(duration) {
+        return this.forEach(elem => Fx.fadeOut(elem, duration));
+    }
+
+    filter(callback) {
+        this.elems = this.elems.filter(callback);
         return this;
     }
 
-    toggleClass(className) {
-        this.elems.forEach(elem => elem.classList.toggle(className));
+    first() {
+        return this.filter((_elem, index) => index === 0);
+    }
+
+    forEach(callback) {
+        this.elems.forEach(callback);
         return this;
+    }
+
+    last() {
+        return this.filter((_elem, index) => index === this.elems.length - 1);
+    }
+
+    odd() {
+        return this.filter((_elem, index) => index % 2 === 1);
+    }
+
+    off(event) {
+        return this.forEach(elem => this.event.unbind(event, elem));
+    }
+
+    on(type, callback) {
+        return this.forEach(elem => this.event.bind(type, callback, elem));
+    }
+
+    prepend(html) {
+        return this.forEach(elem => elem.innerHTML = html + elem.innerHTML);
+    }
+
+    ready(callback) {
+        if (this.elems.length && this.elems[0] instanceof Document) {
+            this.on('DOMContentLoaded', callback);
+        }
     }
 
     removeClass(...className) {
-        this.elems.forEach(elem => elem.classList.remove(...className));
-        return this;
+        return this.forEach(elem => elem.classList.remove(...className));
     }
 
-    // <li style="color: test"></li>
-    // elem.style.backgroundColor = 'red';
-    // elem.style.property = value;
-    // elem.style['background-color'] = value;
-    css(property, value) {
-        this.elems.forEach(elem => elem.style[property] = value);
-        return this;
+    text(value) {
+        return this.forEach(elem => elem.textContent = value);
     }
 
-    // pair
-    // $('li').even().addClass('myStyle');
-    even() {
-        this.elems = this.elems.filter((_elem, index) => index % 2 === 0);
-        return this;
+    toggleClass(className) {
+        return this.forEach(elem => elem.classList.toggle(className));
     }
 
-    // impaire
-    // $('li').odd().addClass('myStyle');
-    odd() {
-        this.elems = this.elems.filter((_elem, index) => index % 2 === 1);
-        return this;
-    }
-
-    /**
-     * Cette méthode permet de récupérer un selector
-     * ou d'envelopper un élément déjà existant.
-     */
-    wrap(selector) {
-        // selector ne doit pas être tableau car un tableau peut être un objet.
-        if (!Array.isArray(selector) && selector === Object(selector)) {
+    query(selector) {
+        if (Utils.isObject(selector)) {
             this.elems = [selector];
+            return this;
         }
-    
-        // Le résultat de querySelector retourne un NodeList.
-        if (typeof selector === 'string' || selector instanceof String) {
-            this.elems = [...document.querySelectorAll(selector)]; 
-        }
+
+        this.elems = [...document.querySelectorAll(selector)];
+        return this;
     }
+
+    setValues(obj) {
+        return this.forEach(elem => {
+            if (elem.value && elem.name && obj.hasOwnProperty(elem.name)) {
+                elem.value = obj[elem.name];
+            }
+        });
+    }
+
+    getValues() {
+        const values = {};
+
+        this.forEach(elem => {
+            if (elem.value && elem.name) {
+                values[elem.name] = elem.value;
+            }
+        });
+
+        return values;
+    }
+
 }

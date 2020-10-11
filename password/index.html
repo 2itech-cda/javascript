@@ -1,30 +1,87 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="fr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Password</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <title>Générez un mot de passe sécurisé</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="https://getbootstrap.com/docs/4.5/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+    <!-- Favicons -->
+    <link rel="icon" href="img/favicon-32x32.png" sizes="32x32" type="image/png">
+    <link rel="icon" href="img/favicon-16x16.png" sizes="16x16" type="image/png">
+    <style>
+        #password-display {
+            font-size: 1.875rem;
+            background-color: #f1f1f1;
+            border: 1px solid #CCC;
+            cursor: pointer;
+        }
+
+        #password-clipboard {
+            display: none;
+        }
+    </style>
 </head>
 
-<body>
+<body class="bg-light">
     <div class="container mt-5">
-        <h1>Password Generator</h1>
-
-        <p id="displayer" style="font-size: 1.42rem;"></p>
-
-        <div class="form-group">
-            <input type="number" id="size" class="form-control" min="8" max="50" value="8" />
+        <div class="py-4 text-center">
+            <img class="d-block mx-auto mb-4" src="img/logo.svg" alt="" width="80" height="80">
+            <h2>Générez un mot de passe sécurisé</h2>
+            <p class="lead">
+                Utilisez notre générateur de mots de passe en ligne pour créer instantanément un mot de passe aléatoire
+                sécurisé.
+            </p>
         </div>
 
-        <div class="form-group">
-            <input type="range" id="slider" class="form-control" min="8" max="50" value="8" />
+        <p id="displayer" class="row justify-content-md-center mb-5" style="font-size: 1.42rem;"></p>
+
+        <div class="row justify-content-md-center">
+            <div class="col-md-5 order-md-2 mb-2">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Caractères</span>
+                </h4>
+                <ul id="options"></ul>
+            </div>
+
+            <div class="col-md-5 order-md-1">
+                <h4 class="mb-3">Personnalisez votre mot de passe</h4>
+                <form class="needs-validation" novalidate>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label>Longueur du mot de passe</label>
+                            <input type="number" id="size" class="form-control" min="8" max="50" value="8" />
+                            <input type="range" id="slider" class="form-control" min="8" max="50" value="8" />
+                        </div>
+                    </div>
+                </form>
+            </div>
         </div>
 
-        <div id="options"></div>
+        <footer class="my-2 pt-3 text-muted text-center text-small">
+            <p class="mb-1">&copy; <script>
+                    document.write((new Date).getFullYear())
+                </script> Password Generator Company</p>
+            <ul class="list-inline">
+                <li class="list-inline-item"><a href="#">Privacy</a></li>
+                <li class="list-inline-item"><a href="#">Terms</a></li>
+                <li class="list-inline-item"><a href="#">Support</a></li>
+            </ul>
+        </footer>
     </div>
 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous">
+    </script>
+    <script src="https://getbootstrap.com/docs/4.5/assets/js/vendor/jquery.slim.min.js"></script>
+    <script src="https://getbootstrap.com/docs/4.5/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-LtrjvnR4Twt/qOuYxE721u19sVFLVSA4hf/rRt6PrZTmiPltdZcI7q7PXQBYTKyf" crossorigin="anonymous">
+    </script>
     <script src="src/password.js"></script>
     <script src="main.js"></script>
 

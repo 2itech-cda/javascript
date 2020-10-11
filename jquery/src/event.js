@@ -1,56 +1,63 @@
-class MyEvent {
+'use strict';
+
+/**
+ * @class Event
+ */
+class Event {
 
     constructor() {
         this.events = [];
     }
 
     /**
-     * Bind permet de lier un événement à un objet.
+     * Bind an event to a target.
      * 
-     * @param {string} evt click, mouseover, keyup, ...
-     * @param {callback} fn callback
-     * @param {object} target élément HTML sur leque on applique l'événement 
+     * @param {string} type 
+     * @param {Event~bind} callback Called if doing asynchronous event succeeds.
+     * @param {object} target
+     * @return {Event}
      */
-    bind(evt, fn, target) {
-        // Ici, si l'événement existe on le supprime.
-        this.unbind(evt, target);
+    bind(type, callback, target) {
+        target.addEventListener(type, callback, false);
 
-        // Ajout de l'événement sur l'objet (target).
-        target.addEventListener(evt, fn, false);
-
-        // On ajoute l'événement dans le tableau pour le retrouver avec find.
         this.events.push({
-            type: evt,
-            event: fn,
+            type: type,
+            callback: callback,
             target: target
+        });
+
+        return this;
+    }
+
+    /**
+     * Find an event by its type.
+     * 
+     * @param {string} type 
+     * @param {object} target 
+     * @return {Event}
+     */
+    find(type, target) {
+        return this.events.filter(event => {
+            return type === event.type && target === event.target;
         });
     }
 
     /**
-     * click,
-     * Find permet de chercher un événement dans le tableau.
-     * On recherche par le type d'événement : click, mouseover, keyup, ...
+     * Unbind an event of target.
      * 
-     * @param {string} evtType click, mouseover, keyup
-     */
-    find(evtType) {
-        return this.events.filter(e => e.type === evtType)[0];
-    }
-
-    /**
-     * Unbind permet de supprimer la liaison d'un évenement d'un objet.
-     * 
-     * @param {string} evt click, keyup, mouseover, ...
+     * @param {string} type
      * @param {object} target 
+     * @returns {Event}
      */
-    unbind(evt, target) {
-        const foundEvt = this.find(evt);
+    unbind(type, target) {
+        const events = this.find(type, target);
 
-        if (foundEvt !== undefined) {
-            target.removeEventListener(foundEvt.type, foundEvt.event, false);
-        }
+        events.forEach(event => {
+            target.removeEventListener(event.type, event.callback, false);
+        });
 
-        this.events = this.events.filter(e => e.type !== evt);
+        this.events = this.events.filter(event => !events.includes(event));
         return this;
     }
+
 }
