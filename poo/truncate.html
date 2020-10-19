@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TP</title>
+</head>
+
+<body>
+
+    <p class="text">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae reiciendis et eius esse
+        asperiores, fuga, a incidunt perspiciatis ipsam, optio iste quas vitae culpa. Neque necessitatibus accusamus
+        doloremque dicta quasi facilis quis aspernatur. Asperiores, similique iste eos, magnam veritatis esse vel,
+        numquam est atque blanditiis impedit nesciunt hic cumque? Ipsa reiciendis quo id nam. Nobis, assumenda velit.
+        Ipsum cum reiciendis deleniti consequuntur magnam molestiae eos sunt quam tempora, qui quas ducimus tenetur.
+        Sunt sit maiores
+    </p>
+
+    <p class="text">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae reiciendis et eius esse
+        asperiores, fuga, a incidunt perspiciatis ipsam, optio iste quas vitae culpa. Neque necessitatibus accusamus
+        doloremque dicta quasi facilis quis aspernatur. Asperiores, similique iste eos, magnam veritatis esse vel,
+        numquam est atque blanditiis impedit nesciunt hic cumque? Ipsa reiciendis quo id nam. Nobis, assumenda velit.
+        Ipsum cum reiciendis deleniti consequuntur magnam molestiae eos sunt quam tempora, qui quas ducimus tenetur.
+        Sunt sit maiores
+    </p>
+
+    <p class="text">
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae reiciendis et eius esse
+        asperiores, fuga, a incidunt perspiciatis ipsam, optio iste quas vitae culpa. Neque necessitatibus accusamus
+        doloremque dicta quasi facilis quis aspernatur. Asperiores, similique iste eos, magnam veritatis esse vel,
+        numquam est atque blanditiis impedit nesciunt hic cumque? Ipsa reiciendis quo id nam. Nobis, assumenda velit.
+        Ipsum cum reiciendis deleniti consequuntur magnam molestiae eos sunt quam tempora, qui quas ducimus tenetur.
+        Sunt sit maiores
+    </p>
+
+    <script>
+        String.prototype.truncate = function (len) {
+            return `${this.substr(0, len)}...`;
+        };
+
+        "hello".truncate(2);
+
+        for (let p of document.querySelectorAll('.text')) {
+            p.textContent = p.textContent.truncate(5);
+        }
+    </script>
+
+</body>
+
+</html>
